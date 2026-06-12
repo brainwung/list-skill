@@ -1,0 +1,7 @@
+interface:
+  display_name: "列表样式"
+  short_description: "响应式数字摘要列表"
+  default_prompt: "使用 $list-skill 生成一个移动端数字摘要列表页面。"
+
+policy:
+  allow_implicit_invocation: true
