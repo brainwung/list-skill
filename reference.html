@@ -33,18 +33,28 @@
     .list-module + .list-module {
       margin-top: 22px;
       padding-top: 22px;
-      border-top: 1px solid #e8e8e8;
+      border-top: 1px solid #eeeeee;
     }
 
     .module-title {
       display: inline-block;
+      position: relative;
       margin: 0 0 18px;
       padding-bottom: 4px;
-      border-bottom: 3px solid #e62828;
       font-size: 18px;
       line-height: 1.2;
       font-weight: 700;
       color: #333;
+    }
+
+    .module-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: min(100%, 36px);
+      height: 3px;
+      background: #e62828;
     }
 
     .summary-list {
