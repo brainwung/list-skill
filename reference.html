@@ -17,34 +17,96 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --list-page-bg: #FFFFFF;
+      --list-text: #333333;
+      --list-divider: #EEEEEE;
+      --list-title-underline: #E62828;
+      --list-control-bg: #FFFFFF;
+      --list-control-border: #EEEEEE;
+      --list-control-text: #333333;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --list-page-bg: #121212;
+        --list-text: #E0E0E0;
+        --list-divider: #353535;
+        --list-title-underline: #F04848;
+        --list-control-bg: #353535;
+        --list-control-border: #353535;
+        --list-control-text: #E0E0E0;
+      }
+    }
+
+    :root[data-theme="light"] {
+      --list-page-bg: #FFFFFF;
+      --list-text: #333333;
+      --list-divider: #EEEEEE;
+      --list-title-underline: #E62828;
+      --list-control-bg: #FFFFFF;
+      --list-control-border: #EEEEEE;
+      --list-control-text: #333333;
+    }
+
+    :root[data-theme="dark"] {
+      --list-page-bg: #121212;
+      --list-text: #E0E0E0;
+      --list-divider: #353535;
+      --list-title-underline: #F04848;
+      --list-control-bg: #353535;
+      --list-control-border: #353535;
+      --list-control-text: #E0E0E0;
+    }
+
     body {
       margin: 0;
-      background: #fff;
-      color: #333;
+      background: var(--list-page-bg);
+      color: var(--list-text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     .list-page {
       min-height: 100vh;
       padding: 24px 15px;
-      background: #fff;
+      background: var(--list-page-bg);
+    }
+
+    .theme-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 18px;
+    }
+
+    .theme-toggle {
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--list-control-border);
+      border-radius: 4px;
+      background: var(--list-control-bg);
+      color: var(--list-control-text);
+      font-size: 13px;
+      line-height: 30px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
     }
 
     .list-module + .list-module {
       margin-top: 22px;
       padding-top: 22px;
-      border-top: 1px solid #eeeeee;
+      border-top: 1px solid var(--list-divider);
     }
 
     .module-title {
       display: inline-block;
       position: relative;
       margin: 0 0 18px;
-      padding-bottom: 4px;
+      padding-bottom: 3px;
       font-size: 18px;
-      line-height: 1.2;
-      font-weight: 700;
-      color: #333;
+      line-height: 1.5;
+      font-weight: 800;
+      color: var(--list-text);
     }
 
     .module-title::after {
@@ -54,7 +116,7 @@
       bottom: 0;
       width: min(100%, 36px);
       height: 3px;
-      background: #e62828;
+      background: var(--list-title-underline);
     }
 
     .summary-list {
@@ -80,35 +142,44 @@
       line-height: 27px;
       font-variant-numeric: tabular-nums;
       text-align: center;
-      color: #333;
+      color: var(--list-text);
     }
 
     .summary-list__text {
       font-size: 15px;
       line-height: 1.8;
-      color: #333;
+      color: var(--list-text);
     }
 
     .summary-list__arrow {
+      display: inline-block;
       width: 16px;
       height: 16px;
       margin-left: -3px;
       vertical-align: -3px;
+      background-image: url("./icons/arrow-right-bold.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
     }
   </style>
 </head>
 <body>
   <main class="list-page">
+    <div class="theme-toolbar">
+      <button class="theme-toggle" type="button" aria-pressed="false">深色模式</button>
+    </div>
+
     <section class="list-module" aria-labelledby="module-a">
       <h2 class="module-title" id="module-a">模块标题</h2>
       <ol class="summary-list">
         <li class="summary-list__item">
           <span class="summary-list__index">01</span>
-          <span class="summary-list__text">摘要文字保持简洁，箭头紧跟句尾。<img class="summary-list__arrow" src="./icons/arrow-right-bold.svg" alt=""></span>
+          <span class="summary-list__text">摘要文字保持简洁，箭头紧跟句尾。<span class="summary-list__arrow" aria-hidden="true"></span></span>
         </li>
         <li class="summary-list__item">
           <span class="summary-list__index">02</span>
-          <span class="summary-list__text">第二条列表用于确认序号、行高和间距。<img class="summary-list__arrow" src="./icons/arrow-right-bold.svg" alt=""></span>
+          <span class="summary-list__text">第二条列表用于确认序号、行高和间距。<span class="summary-list__arrow" aria-hidden="true"></span></span>
         </li>
       </ol>
     </section>
@@ -118,14 +189,25 @@
       <ol class="summary-list">
         <li class="summary-list__item">
           <span class="summary-list__index">01</span>
-          <span class="summary-list__text">多模块之间使用细线分隔，页面宽度保持自适应。<img class="summary-list__arrow" src="./icons/arrow-right-bold.svg" alt=""></span>
+          <span class="summary-list__text">多模块之间使用细线分隔，页面宽度保持自适应。<span class="summary-list__arrow" aria-hidden="true"></span></span>
         </li>
         <li class="summary-list__item">
           <span class="summary-list__index">02</span>
-          <span class="summary-list__text">复制此结构即可扩展更多列表项。<img class="summary-list__arrow" src="./icons/arrow-right-bold.svg" alt=""></span>
+          <span class="summary-list__text">复制此结构即可扩展更多列表项。<span class="summary-list__arrow" aria-hidden="true"></span></span>
         </li>
       </ol>
     </section>
   </main>
+  <script>
+    const root = document.documentElement;
+    const button = document.querySelector(".theme-toggle");
+
+    button.addEventListener("click", () => {
+      const isDark = root.dataset.theme === "dark";
+      root.dataset.theme = isDark ? "light" : "dark";
+      button.textContent = isDark ? "深色模式" : "浅色模式";
+      button.setAttribute("aria-pressed", String(!isDark));
+    });
+  </script>
 </body>
 </html>
